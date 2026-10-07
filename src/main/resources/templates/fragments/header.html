@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="header(activePage)">
+  <div class="bg-gradient-to-r from-kirana-900 via-kirana-800 to-kirana-900 text-amber-200 text-xs md:text-sm py-2 px-4 text-center font-medium flex items-center justify-center gap-2">
+    <span class="bg-saffron-600 text-white text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-full tracking-wider">Kirana Express</span>
+    <span>⚡ Free Home Delivery on orders above ₹499 in Sikandra Rao town | Express Store Pickup Available</span>
+  </div>
+
+  <header class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+      <a th:href="@{/}" class="flex items-center gap-3 text-left group  ">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-kirana-800 to-kirana-600 flex items-center justify-center text-white shadow-md shadow-kirana-900/20 group-hover:scale-105 transition transform">
+          <i class="fa-solid fa-store text-lg"></i>
+        </div>
+        <div>
+          <span class="text-xl font-extrabold text-slate-900 tracking-tight block leading-tight ">Pandit <span class="text-saffron-600">General Store</span></span>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-kirana-700 block">Shuddh Kirana • Quality Assurance</span>
+        </div>
+      </a>
+
+      <div class="hidden lg:flex items-center bg-slate-100 p-1.5 rounded-xl border border-slate-200/80">
+        <span class="text-xs font-bold text-slate-500 px-3 uppercase tracking-wider">Direct Category:</span>
+        <select onchange="goCategory(this.value)" class="bg-white text-slate-700 text-xs font-semibold rounded-lg px-3 py-1.5 border border-slate-200">
+          <option value="all">⚡ Select All Grocery Categories</option>
+          <option value="atta-rice-dals">🌾 Atta, Rice & Dals</option>
+          <option value="oil-spices">🛢️ Oils, Ghee & Spices</option>
+          <option value="snacks-beverages">🍵 Tea, Snacks & Biscuits</option>
+          <option value="dairy-bakery">🥛 Fresh Dairy & Bakery</option>
+          <option value="cleaning-household">🧹 Household & Personal Care</option>
+        </select>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a th:href="@{/user/auth}" class="hidden sm:flex items-center gap-2 text-xs font-bold text-slate-700 bg-slate-100 px-3 py-2 rounded-lg">
+          <i class="fa-regular fa-user text-kirana-700"></i>
+          <span>Login / Account</span>
+        </a>
+        <a th:href="@{/user/cart}" class="relative bg-kirana-50 text-kirana-800 p-2.5 rounded-xl border border-kirana-200 shadow-sm flex items-center gap-2 font-bold text-xs">
+          <i class="fa-solid fa-basket-shopping text-base text-kirana-700"></i>
+          <span class="hidden md:inline">Cart</span>
+          <span id="cartBadgeCount" class="bg-saffron-600 text-white text-[11px] w-5 h-5 flex items-center justify-center rounded-full font-extrabold">0</span>
+        </a>
+      </div>
+    </div>
+
+    <nav class="bg-white border-t border-slate-100 px-4">
+      <div class="max-w-7xl mx-auto flex items-center justify-between sm:justify-start gap-1 sm:gap-6 overflow-x-auto py-2 text-xs font-semibold text-slate-600 no-scrollbar">
+
+        <a th:href="@{/user/index}" class="nav-tab-btn py-1.5 px-3 rounded-lg transition hover:text-kirana-700 flex items-center gap-1.5 whitespace-nowrap " th:classappend="${activePage == 'home'} ? ' active-tab'"><i class="fa-solid fa-house"></i> Home</a>
+
+        <a th:href="@{/user/products}" class="py-1.5 px-3 rounded-lg hover:text-kirana-700 whitespace-nowrap "th:classappend="${activePage == 'products'} ? ' active-tab'"><i class="fa-solid fa-cubes"></i> Grocery Catalog</a>
+
+        <a th:href="@{/user/deals}" class="py-1.5 px-3 rounded-lg hover:text-kirana-700 whitespace-nowrap " th:classappend="${activePage == 'deals'} ? ' active-tab'"><i class="fa-solid fa-bolt text-saffron-600"></i> Today's Deals</a>
+        <a th:href="@{/user/cart}" class="py-1.5 px-3 rounded-lg hover:text-kirana-700 whitespace-nowrap"  th:classappend="${activePage == 'cart'} ? ' active-tab'"><i class="fa-solid fa-cart-flatbed"></i> My Basket</a>
+
+        <a th:href="@{/user/auth}" class="sm:hidden py-1.5 px-3 rounded-lg hover:text-kirana-700 whitespace-nowrap active-tab" th:classappend="${activePage == 'auth'} ? ' active-tab'"><i class="fa-solid fa-user"></i> Account</a>
+      </div>
+    </nav>
+  </header>
+</th:block>
+</html>

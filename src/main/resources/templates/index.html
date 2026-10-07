@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pandit General Store</title>
+
+<script src="https://cdn.tailwindcss.com">
+
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+<script>
+tailwind.config = {
+  theme: { extend: {
+    fontFamily: { sans: ['Inter', 'sans-serif'] },
+    colors: {
+      kirana: {50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',500:'#22c55e',600:'#16a34a',700:'#15803d',800:'#166534',900:'#14532d'},
+      saffron: {500:'#f97316',600:'#ea580c',700:'#c2410c'}
+    }
+  }}
+};
+</script>
+
+<link rel="stylesheet" th:href="@{/style/app.css}">
+
+</head>
+
+
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen antialiased">
+<div th:replace="~{fragments/header::header('home')}"></div>
+
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+  <section id="heroSlider"
+           class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-kirana-900 via-kirana-800 to-emerald-900 text-white shadow-xl p-8 md:p-12 min-h-[500px]">
+
+    <!-- SLIDE 1 -->
+    <div class="hero-slide absolute inset-0 p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 opacity-100 translate-x-0 transition-all duration-700">
+
+      <div class="space-y-4 max-w-xl text-center md:text-left">
+            <span class="inline-flex items-center gap-1.5 bg-saffron-600/90 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                <i class="fa-solid fa-shield-halved"></i>
+                100% Original Kirana Essentials
+            </span>
+
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
+          Fresh Daily Grocery Straight To Your Kitchen
+        </h1>
+
+        <p class="text-kirana-100 text-sm sm:text-base">
+          Pure spices, premium basmati, unpolished dals, and fresh daily cooking oils at guaranteed fair local wholesale rates.
+        </p>
+
+        <div class="pt-2 flex flex-wrap gap-3 justify-center md:justify-start">
+          <a th:href="@{/user/products}"
+             class="bg-saffron-600 hover:bg-saffron-700 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-lg">
+            Browse All Products
+            <i class="fa-solid fa-arrow-right ml-1"></i>
+          </a>
+
+          <a th:href="@{/user/deals}"
+             class="bg-white/10 hover:bg-white/20 text-white font-semibold text-sm px-5 py-3 rounded-xl border border-white/20">
+            View Flash Deals
+          </a>
+        </div>
+      </div>
+
+      <div class="relative w-full md:w-80 h-60 bg-kirana-800/60 rounded-2xl border border-white/10 flex flex-col items-center justify-center text-center p-6">
+        <div class="w-24 h-24 rounded-full bg-saffron-500/20 text-saffron-400 flex items-center justify-center text-5xl mb-3">
+          <i class="fa-solid fa-wheat-awn-circle-exclamation"></i>
+        </div>
+
+        <span class="text-xs font-bold text-amber-200">
+                Pandit Kirana Guarantee
+            </span>
+
+        <span class="text-[11px] text-kirana-200 mt-1">
+                Direct from farms & verified local mandis
+            </span>
+      </div>
+    </div>
+
+
+    <!-- SLIDE 2 -->
+    <div class="hero-slide absolute inset-0 p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 opacity-0 translate-x-full transition-all duration-700">
+
+      <div class="space-y-4 max-w-xl text-center md:text-left">
+            <span class="inline-flex items-center gap-1.5 bg-saffron-600/90 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                <i class="fa-solid fa-star"></i>
+                Premium Quality
+            </span>
+
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
+          Premium Quality Products At Honest Prices
+        </h1>
+
+        <p class="text-kirana-100 text-sm sm:text-base">
+          Carefully selected rice, dals, spices and everyday grocery essentials for your family.
+        </p>
+
+        <div class="pt-2">
+          <a th:href="@{/user/products}"
+             class="inline-block bg-saffron-600 hover:bg-saffron-700 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-lg">
+            Shop Now
+            <i class="fa-solid fa-arrow-right ml-1"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="relative w-full md:w-80 h-60 bg-kirana-800/60 rounded-2xl border border-white/10 flex items-center justify-center">
+        <i class="fa-solid fa-bowl-rice text-8xl text-amber-200"></i>
+      </div>
+    </div>
+
+
+    <!-- SLIDE 3 -->
+    <div class="hero-slide absolute inset-0 p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 opacity-0 translate-x-full transition-all duration-700">
+
+      <div class="space-y-4 max-w-xl text-center md:text-left">
+            <span class="inline-flex items-center gap-1.5 bg-saffron-600/90 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                <i class="fa-solid fa-bolt"></i>
+                Today's Deals
+            </span>
+
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
+          Save More On Your Everyday Groceries
+        </h1>
+
+        <p class="text-kirana-100 text-sm sm:text-base">
+          Grab today's special offers and get quality grocery products delivered to your doorstep.
+        </p>
+
+        <div class="pt-2">
+          <a th:href="@{/user/deals}"
+             class="inline-block bg-saffron-600 hover:bg-saffron-700 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-lg">
+            View Today's Deals
+            <i class="fa-solid fa-arrow-right ml-1"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="relative w-full md:w-80 h-60 bg-kirana-800/60 rounded-2xl border border-white/10 flex items-center justify-center">
+        <i class="fa-solid fa-tags text-8xl text-amber-200"></i>
+      </div>
+    </div>
+
+
+    <!-- DOTS -->
+    <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+      <button class="hero-dot w-2.5 h-2.5 rounded-full bg-white"></button>
+      <button class="hero-dot w-2.5 h-2.5 rounded-full bg-white/40"></button>
+      <button class="hero-dot w-2.5 h-2.5 rounded-full bg-white/40"></button>
+    </div>
+
+  </section>
+
+<section class="space-y-4 mt-10">
+  <div class="flex items-center justify-between"><div><h2 class="text-xl font-bold text-slate-900">Explore Essential Categories</h2><p class="text-xs text-slate-500">Pick a grocery tab to immediately filter your items</p></div><a th:href="@{/user/products}" class="text-xs font-bold text-kirana-700 hover:underline">See All</a></div>
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+    <a th:each="c : ${categories}" th:href="@{/products(category=${c.slug})}" class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition text-center group flex flex-col items-center">
+      <div class="w-14 h-14 rounded-2xl bg-kirana-50 text-kirana-700 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition"><i class="fa-solid fa-bowl-rice"></i></div>
+      <span th:text="${c.name}" class="font-bold text-xs text-slate-800">Category</span>
+      <span th:text="${c.subtitle}" class="text-[10px] text-slate-400 mt-0.5">Category description</span>
+    </a>
+  </div>
+</section>
+
+<section class="space-y-4 mt-10">
+  <div class="flex items-center justify-between"><div><h2 class="text-xl font-bold text-slate-900">🔥 Daily Grocery Highlights</h2><p class="text-xs text-slate-500">Handpicked items with active discounts today</p></div><a th:href="@{/deals}" class="text-xs font-bold text-saffron-600 hover:underline">View All Deals</a></div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div th:each="product : ${deals}" class="bg-white rounded-2xl border border-slate-100 shadow-sm p-4">
+      <div class="h-32 rounded-xl bg-kirana-50 flex items-center justify-center text-5xl text-kirana-700"><i class="fa-solid fa-basket-shopping"></i></div>
+      <h3 th:text="${product.name}" class="font-extrabold text-sm mt-3">Product</h3>
+      <p th:text="'₹' + ${product.price}" class="text-kirana-800 font-black mt-1">₹0</p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 md:p-10 relative overflow-hidden mt-10">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center relative z-10">
+    <div class="text-center space-y-3 bg-slate-50 p-6 rounded-2xl border border-slate-200/60">
+      <div class="w-32 h-32 mx-auto rounded-full bg-gradient-to-tr from-kirana-800 to-kirana-600 p-1 shadow-lg"><div class="w-full h-full rounded-full bg-white flex items-center justify-center"><i class="fa-solid fa-user-tie text-5xl text-kirana-800"></i></div></div>
+      <h3 class="text-lg font-extrabold text-slate-900">Shri Pandit Ji</h3><p class="text-xs font-bold text-kirana-700 uppercase tracking-wider">Founder & Proprietor</p>
+      <span class="inline-block bg-amber-100 text-amber-800 text-[11px] font-bold px-3 py-0.5 rounded-full">Serving Since 1998</span>
+    </div>
+    <div class="md:col-span-2 space-y-4">
+      <span class="text-xs font-extrabold text-kirana-800 bg-kirana-100 px-3 py-1 rounded-full uppercase tracking-wider">Our Story & Legacy</span>
+      <h2 class="text-2xl font-extrabold text-slate-900">25+ Years of Purity, Trust & Fair Local Prices</h2>
+      <p class="text-xs md:text-sm text-slate-600 leading-relaxed">Welcome to <strong>Pandit General Store</strong>! Established in 1998, our store began as a modest neighborhood Kirana shop in Sikandra Rao. Over the last two decades, we have remained dedicated to one core principle: <em>Uncompromised quality and complete transparency.</em></p>
+      <p class="text-xs md:text-sm text-slate-600 leading-relaxed">We personally inspect and source our grains, unpolished pulses, and pure spices straight from trusted agricultural hubs and verified suppliers.</p>
+      <div class="grid grid-cols-3 gap-3 pt-2 text-center">
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-100"><b class="block text-base text-kirana-800">100% Pure</b><span class="text-[11px] text-slate-500">Quality Assured</span></div>
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-100"><b class="block text-base text-kirana-800">Wholesale</b><span class="text-[11px] text-slate-500">Fair Local Rates</span></div>
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-100"><b class="block text-base text-kirana-800">Doorstep</b><span class="text-[11px] text-slate-500">Express Delivery</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div th:replace="~{fragments/footer::footer}"></div>
+<script th:src="@{/script/app.js}"></script>
+</body></html>

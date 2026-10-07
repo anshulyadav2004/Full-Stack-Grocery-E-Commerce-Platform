@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Today's Deals | Pandit General Store</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    fontFamily: { sans: ['Inter', 'sans-serif'] },
+    colors: {
+      kirana: {50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',500:'#22c55e',600:'#16a34a',700:'#15803d',800:'#166534',900:'#14532d'},
+      saffron: {500:'#f97316',600:'#ea580c',700:'#c2410c'}
+    }
+  }}
+};
+</script>
+<link rel="stylesheet" th:href="@{/style/app.css}">
+
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen antialiased">
+<div th:replace="~{fragments/header::header(deals)}"></div>
+
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
+<section class="bg-gradient-to-r from-saffron-600 to-amber-600 rounded-3xl p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4">
+  <div class="space-y-2"><span class="bg-white/20 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase">Limited Time Offers</span><h1 class="text-3xl font-extrabold">Current & Upcoming Super Savings</h1><p class="text-amber-100 text-xs sm:text-sm">Exclusive Kirana discounts directly passed on from bulk distributors.</p></div>
+  <div class="bg-white/10 px-5 py-3 rounded-2xl border border-white/20 text-center"><span class="block text-[10px] text-amber-200 uppercase font-bold">Today's Offer Timer</span><span id="dealTimer" class="text-xl font-black font-mono">-- : -- : --</span></div>
+</section>
+<section class="space-y-4">
+<h2 class="text-lg font-bold text-slate-900"><i class="fa-solid fa-fire text-saffron-600"></i> Active Current Flash Sales</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div th:each="product : ${deals}" class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+    <div class="h-40 rounded-2xl bg-kirana-50 flex items-center justify-center text-6xl text-kirana-700"><i class="fa-solid fa-basket-shopping"></i></div>
+    <span th:text="${product.discount}" class="inline-block mt-4 bg-saffron-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full">10% OFF</span>
+    <h3 th:text="${product.name}" class="font-extrabold text-slate-900 mt-2">Product</h3>
+    <p th:text="${product.description}" class="text-xs text-slate-500 mt-1 line-clamp-2">Description</p>
+    <div class="flex justify-between items-center mt-4"><b th:text="'₹' + ${product.price}" class="text-xl text-kirana-800">₹0</b><a th:href="@{/products/{id}(id=${product.id})}" class="bg-kirana-800 text-white text-xs font-bold px-4 py-2 rounded-xl">View Deal</a></div>
+  </div>
+</div>
+</section>
+<section class="bg-amber-50/70 border border-amber-200/80 rounded-3xl p-6 space-y-4">
+<h2 class="text-lg font-bold text-amber-900"><i class="fa-solid fa-calendar-check text-amber-700"></i> Teaser: Upcoming Festival Deals</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div class="bg-white p-4 rounded-2xl border border-amber-200/50"><span class="text-[10px] font-bold uppercase text-saffron-600">Starts This Saturday</span><h3 class="font-bold text-slate-800 text-sm mt-1">Dry Fruits & Festival Sweets Combo</h3><p class="text-xs text-slate-500 mt-1">Flat 20% OFF on Premium California Almonds, Cashews & Pure Desi Ghee.</p></div>
+  <div class="bg-white p-4 rounded-2xl border border-amber-200/50"><span class="text-[10px] font-bold uppercase text-saffron-600">Monthly Kirana Offer</span><h3 class="font-bold text-slate-800 text-sm mt-1">Monthly Grocery Basket Savings</h3><p class="text-xs text-slate-500 mt-1">Get ₹150 instant discount on total monthly orders exceeding ₹2,500.</p></div>
+  <div class="bg-white p-4 rounded-2xl border border-amber-200/50"><span class="text-[10px] font-bold uppercase text-saffron-600">Cleaning Bonanza</span><h3 class="font-bold text-slate-800 text-sm mt-1">Household Cleansing Pack</h3><p class="text-xs text-slate-500 mt-1">Buy 2 Get 1 Free offer on Surf Excel detergent and floor cleaners.</p></div>
+</div>
+</section>
+</main>
+
+<div th:replace="~{fragments/footer::footer}"></div>
+<script th:src="@{/script/app.js}"></script>
+</body></html>

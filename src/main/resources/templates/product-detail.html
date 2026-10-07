@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Product Details | Pandit General Store</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    fontFamily: { sans: ['Inter', 'sans-serif'] },
+    colors: {
+      kirana: {50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',500:'#22c55e',600:'#16a34a',700:'#15803d',800:'#166534',900:'#14532d'},
+      saffron: {500:'#f97316',600:'#ea580c',700:'#c2410c'}
+    }
+  }}
+};
+</script>
+<link rel="stylesheet" th:href="@{/style/app.css}">
+
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen antialiased">
+<div th:replace="~{fragments/header::header(product-detail)}"></div>
+
+<main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<a th:href="@{/products}" class="inline-flex items-center gap-2 text-xs font-bold text-kirana-800 hover:underline mb-5"><i class="fa-solid fa-arrow-left"></i> Back to Products Catalog</a>
+<div class="bg-white rounded-3xl border border-slate-100 shadow-sm p-6 md:p-10">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div class="h-80 rounded-3xl bg-kirana-50 text-kirana-700 flex items-center justify-center text-8xl"><i class="fa-solid fa-basket-shopping"></i></div>
+    <div>
+      <span th:text="${product.category}" class="text-[10px] uppercase font-bold text-slate-400">category</span>
+      <h1 th:text="${product.name}" class="text-3xl font-extrabold text-slate-900 mt-2">Product Name</h1>
+      <p th:text="${product.description}" class="text-sm text-slate-600 leading-relaxed mt-4">Product description.</p>
+      <div class="mt-6"><span th:text="'₹' + ${product.price}" class="text-3xl font-black text-kirana-800">₹0</span><span th:text="'₹' + ${product.originalPrice}" class="text-sm text-slate-400 line-through ml-2">₹0</span></div>
+      <div class="mt-6">
+        <p class="text-xs font-bold text-slate-700 mb-2">Select Pack</p>
+        <div class="flex flex-wrap gap-2"><span th:each="w : ${product.weightOptions}" th:text="${w}" class="border border-slate-200 rounded-xl px-4 py-2 text-xs font-bold">1kg</span></div>
+      </div>
+      <form th:action="@{/cart/add}" method="post" class="mt-7 flex gap-3">
+        <input type="hidden" name="productId" th:value="${product.id}">
+        <button th:disabled="${!product.inStock}" class="bg-kirana-800 hover:bg-kirana-900 disabled:bg-slate-300 text-white font-extrabold text-sm px-7 py-3 rounded-xl">Add to Basket</button>
+        <a th:href="@{/cart}" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm px-7 py-3 rounded-xl">View Cart</a>
+      </form>
+    </div>
+  </div>
+</div>
+</main>
+
+<div th:replace="~{fragments/header::footer}"></div>
+<script th:src="@{/script/app.js}"></script>
+</body>
+</html>

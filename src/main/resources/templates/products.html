@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Grocery Catalog | Pandit General Store</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    fontFamily: { sans: ['Inter', 'sans-serif'] },
+    colors: {
+      kirana: {50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',500:'#22c55e',600:'#16a34a',700:'#15803d',800:'#166534',900:'#14532d'},
+      saffron: {500:'#f97316',600:'#ea580c',700:'#c2410c'}
+    }
+  }}
+};
+</script>
+<link rel="stylesheet" th:href="@{/style/app.css}">
+
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen antialiased">
+<div th:replace="~{fragments/header::header(products)}"></div>
+
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+<section class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+  <div><h1 class="text-2xl font-extrabold text-slate-900">Grocery Store Catalog</h1><p class="text-xs text-slate-500">Select categories below to view available items</p></div>
+  <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
+    <a th:href="@{/products}" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 whitespace-nowrap">All Items</a>
+
+    <a th:each="c : ${categories}" th:href="@{/products(category=${c.slug})}" th:text="${c.name}" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 whitespace-nowrap">Category</a>
+
+  </div>
+</section>
+
+
+<section class="mt-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  <div th:each="product : ${products}" class="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 hover:shadow-md transition flex flex-col">
+    <span th:text="${product.discount}" class="self-start bg-saffron-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full">10% OFF</span>
+    <a th:href="@{/products/{id}(id=${product.id})}">
+      <div class="w-full h-36 rounded-xl bg-kirana-50 text-kirana-700 flex items-center justify-center text-5xl my-3"><i class="fa-solid fa-basket-shopping"></i></div>
+      <span th:text="${product.category.name}" class="text-[10px] uppercase font-bold text-slate-400 block">category</span>
+      <h3 th:text="${product.name}" class="font-extrabold text-slate-800 text-sm">Product</h3>
+      <p th:text="${product.weight}" class="text-[11px] text-slate-500 mt-0.5">1 kg</p>
+    </a>
+    <div class="mt-4 pt-3 border-t border-slate-100">
+      <div class="flex items-center justify-between mb-3">
+        <div><span th:text="'₹' + ${product.price}" class="text-base font-black text-kirana-800">₹100</span><span th:text="'₹' + ${product.originalPrice}" class="text-xs text-slate-400 line-through ml-1">₹120</span></div>
+        <span th:if="${product.inStock}" class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">In Stock</span>
+        <span th:unless="${product.inStock}" class="text-[10px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-full">Out of Stock</span>
+      </div>
+      <div class="grid grid-cols-2 gap-2">
+        <a th:href="@{/products/{id}(id=${product.id})}" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2 rounded-xl text-center">Details</a>
+        <form th:action="@{/cart/add}" method="post">
+          <input type="hidden" name="productId" th:value="${product.id}">
+          <button th:disabled="${!product.inStock}" class="w-full bg-kirana-800 hover:bg-kirana-900 disabled:bg-slate-300 text-white font-bold text-xs py-2 rounded-xl">+ Add</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div th:if="${#lists.isEmpty(products)}" class="col-span-full py-12 text-center text-slate-400"><i class="fa-solid fa-box-open text-5xl mb-3"></i><p class="font-bold text-sm">No items found in this category right now.</p></div>
+</div>
+</section>
+</main>
+
+<div th:replace="~{fragments/footer::footer}"></div>
+<script th:src="@{/script/app.js}"></script>
+</body></html>
